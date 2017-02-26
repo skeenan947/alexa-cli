@@ -52,10 +52,9 @@ req['request']['intent']['name'] = options[:intent]
 optslots = options[:slots].split(',')
 optslots.each do |slot|
   (name,value) = slot.split('=')
-  req['request']['intent']['slots'][name] = {
-    'name' => name,
-    'value' => value
-  }
+  req['request']['intent']['slots'][name] = {}
+  req['request']['intent']['slots'][name]['name'] = name
+  req['request']['intent']['slots'][name]['value'] = value unless value.nil?
 end
 
 puts "sending intent: #{options[:intent]}"
